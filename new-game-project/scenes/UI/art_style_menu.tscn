@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://jxdqmoiv4kig"]
+
+[ext_resource type="Script" uid="uid://diww00s7s3r34" path="res://scripts/art_style_menu.gd" id="1_4crcq"]
+[ext_resource type="Shader" uid="uid://cwhd4l0bkkj52" path="res://assets/shaders/root_node.gdshader" id="2_ebypq"]
+[ext_resource type="Texture2D" uid="uid://c0n7qhnqki653" path="res://assets/style1/environment/cave_background.png" id="3_hvsox"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c4p38"]
+shader = ExtResource("2_ebypq")
+shader_parameter/tile_scale = 3.0
+
+[node name="art_style_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4crcq")
+
+[node name="cave_background" type="Polygon2D" parent="."]
+light_mask = 0
+z_index = -10
+texture_repeat = 2
+material = SubResource("ShaderMaterial_c4p38")
+position = Vector2(161.391, 363.316)
+scale = Vector2(0.284926, 0.297511)
+texture = ExtResource("3_hvsox")
+polygon = PackedVector2Array(-576, -1244.6, -591, 1037.55, 3560, 1024, 3575, -1248.07)
+uv = PackedVector2Array(551, -1257, 39, -1124, -459, -602, -555, 49, -561, 686, -490, 1016, 3560, 1024, 3411, -649, 3038, -1014, 2608, -1105, 1953, -881, 1398, -715, 1042, -740, 827, -1080)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 393.0
+offset_top = 272.0
+offset_right = 765.0
+offset_bottom = 522.0
+
+[node name="digital_art" type="Button" parent="VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Digital Art"
+
+[node name="pixel_art" type="Button" parent="VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Pixel Art"
+
+[node name="pencil_art" type="Button" parent="VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Pencil Art"
+
+[connection signal="pressed" from="VBoxContainer/digital_art" to="." method="_on_digital_art_pressed"]
+[connection signal="pressed" from="VBoxContainer/pixel_art" to="." method="_on_pixel_art_pressed"]
+[connection signal="pressed" from="VBoxContainer/pencil_art" to="." method="_on_pencil_art_pressed"]

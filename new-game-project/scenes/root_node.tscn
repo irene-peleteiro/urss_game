@@ -1,0 +1,98 @@
+[gd_scene load_steps=13 format=3 uid="uid://by45oky1inesv"]
+
+[ext_resource type="Script" uid="uid://cq5gk6r8b5xbq" path="res://scripts/root_node.gd" id="1_vhsfa"]
+[ext_resource type="PackedScene" uid="uid://fw7bjbh6uerk" path="res://scenes/sprites/sandcat.tscn" id="1_ynfbw"]
+[ext_resource type="Shader" uid="uid://cwhd4l0bkkj52" path="res://assets/shaders/root_node.gdshader" id="2_j38m8"]
+[ext_resource type="PackedScene" uid="uid://de7qxfhc46bca" path="res://scenes/UI/art_style_button.tscn" id="2_l3gbx"]
+[ext_resource type="Script" uid="uid://c0n2yjh5ptnxv" path="res://scripts/environment.gd" id="3_gwtxu"]
+[ext_resource type="Texture2D" uid="uid://c0n7qhnqki653" path="res://assets/style3/environment/cave_background.png" id="3_ldoum"]
+[ext_resource type="PackedScene" uid="uid://dve3kyehsa1vu" path="res://scenes/environment/floor.tscn" id="4_7b5fe"]
+[ext_resource type="PackedScene" uid="uid://ddgqfv4aut45v" path="res://scenes/environment/cave_1.tscn" id="4_jfjke"]
+[ext_resource type="PackedScene" uid="uid://l3llu6najks2" path="res://scenes/environment/platform.tscn" id="5_jfjke"]
+[ext_resource type="PackedScene" uid="uid://jxdqmoiv4kig" path="res://scenes/UI/art_style_menu.tscn" id="7_d78ui"]
+[ext_resource type="PackedScene" uid="uid://bdfhxuom6gf80" path="res://scenes/environment/waterfall.tscn" id="11_t75in"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l3gbx"]
+shader = ExtResource("2_j38m8")
+shader_parameter/tile_scale = 3.0
+
+[node name="root_node" type="Node2D"]
+script = ExtResource("1_vhsfa")
+
+[node name="sandcat" parent="." instance=ExtResource("1_ynfbw")]
+z_index = 10
+position = Vector2(262, -744)
+
+[node name="Camera2D" type="Camera2D" parent="sandcat"]
+position = Vector2(-1, -68)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.0
+
+[node name="environment" type="Node2D" parent="."]
+script = ExtResource("3_gwtxu")
+
+[node name="cave_background" type="Polygon2D" parent="environment"]
+visible = false
+z_index = -10
+texture_repeat = 2
+material = SubResource("ShaderMaterial_l3gbx")
+position = Vector2(18, -98)
+scale = Vector2(1, 0.864533)
+texture = ExtResource("3_ldoum")
+polygon = PackedVector2Array(551, -1257, 39, -1124, -355, -476, -555, 49, -561, 686, -490, 1016, 3560, 1024, 3411, -649, 2979, -781.599, 2631, -872.978, 1953, -881, 1390, -815, 1042, -740, 827, -1080)
+uv = PackedVector2Array(551, -1257, 39, -1124, -459, -602, -555, 49, -561, 686, -490, 1016, 3560, 1024, 3411, -649, 3038, -1014, 2608, -1105, 1953, -881, 1398, -715, 1042, -740, 827, -1080)
+
+[node name="cave1" parent="environment" instance=ExtResource("4_jfjke")]
+position = Vector2(954, -284)
+
+[node name="all_platforms" type="Node2D" parent="environment"]
+position = Vector2(2214, -331)
+
+[node name="floor3" parent="environment/all_platforms" instance=ExtResource("4_7b5fe")]
+position = Vector2(-403, 159)
+
+[node name="platform5" parent="environment/all_platforms" instance=ExtResource("5_jfjke")]
+
+[node name="platform4" parent="environment/all_platforms" instance=ExtResource("5_jfjke")]
+position = Vector2(-1453, 115)
+
+[node name="floor2" parent="environment/all_platforms" instance=ExtResource("4_7b5fe")]
+position = Vector2(-1919, 626)
+
+[node name="platform3" parent="environment/all_platforms" instance=ExtResource("5_jfjke")]
+position = Vector2(-845, 267)
+
+[node name="platform2" parent="environment/all_platforms" instance=ExtResource("5_jfjke")]
+position = Vector2(-1379, 427)
+
+[node name="platform" parent="environment/all_platforms" instance=ExtResource("5_jfjke")]
+position = Vector2(-2379, 375)
+
+[node name="floor" parent="environment/all_platforms" instance=ExtResource("4_7b5fe")]
+position = Vector2(-1920, -266)
+
+[node name="sky" type="Polygon2D" parent="environment"]
+visible = false
+z_index = -15
+position = Vector2(63, 2)
+color = Color(0.505882, 0.572549, 0.623529, 1)
+polygon = PackedVector2Array(-1285, -1692, 3889, -1692, 3918, 1182, -1481, 1210)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="art_style_menu" parent="CanvasLayer" instance=ExtResource("7_d78ui")]
+visible = false
+
+[node name="art_style_button" parent="CanvasLayer" instance=ExtResource("2_l3gbx")]
+z_index = 2
+offset_left = 0.0
+offset_bottom = 0.0
+
+[node name="Node2D" parent="." instance=ExtResource("11_t75in")]
+position = Vector2(2689, -622)

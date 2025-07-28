@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dve3kyehsa1vu"]
+
+[ext_resource type="Texture2D" uid="uid://drpjf5c2qjm2o" path="res://assets/style3/environment/floor.png" id="1_ukw5w"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1rvl0"]
+radius = 12.9984
+height = 392.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(1, -81)
+
+[node name="Floor" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-1.50003, 82)
+scale = Vector2(0.24515, 0.198276)
+texture = ExtResource("1_ukw5w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-3, 82)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_1rvl0")
