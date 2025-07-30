@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://by45oky1inesv"]
+[gd_scene load_steps=14 format=3 uid="uid://by45oky1inesv"]
 
 [ext_resource type="Script" uid="uid://cq5gk6r8b5xbq" path="res://scripts/root_node.gd" id="1_vhsfa"]
 [ext_resource type="PackedScene" uid="uid://fw7bjbh6uerk" path="res://scenes/sprites/sandcat.tscn" id="1_ynfbw"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://l3llu6najks2" path="res://scenes/environment/platform.tscn" id="5_jfjke"]
 [ext_resource type="PackedScene" uid="uid://jxdqmoiv4kig" path="res://scenes/UI/art_style_menu.tscn" id="7_d78ui"]
 [ext_resource type="PackedScene" uid="uid://bdfhxuom6gf80" path="res://scenes/environment/waterfall.tscn" id="11_t75in"]
+[ext_resource type="PackedScene" uid="uid://bnu0wl2c77mm3" path="res://scenes/environment/breaking_platform.tscn" id="12_b33qr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l3gbx"]
 shader = ExtResource("2_j38m8")
@@ -76,12 +77,18 @@ position = Vector2(-2379, 375)
 [node name="floor" parent="environment/all_platforms" instance=ExtResource("4_7b5fe")]
 position = Vector2(-1920, -266)
 
+[node name="breaking_platform" parent="environment" instance=ExtResource("12_b33qr")]
+position = Vector2(3000, 361)
+
 [node name="sky" type="Polygon2D" parent="environment"]
 visible = false
 z_index = -15
 position = Vector2(63, 2)
 color = Color(0.505882, 0.572549, 0.623529, 1)
 polygon = PackedVector2Array(-1285, -1692, 3889, -1692, 3918, 1182, -1481, 1210)
+
+[node name="waterfall" parent="environment" instance=ExtResource("11_t75in")]
+position = Vector2(2689, -622)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
@@ -93,6 +100,3 @@ visible = false
 z_index = 2
 offset_left = 0.0
 offset_bottom = 0.0
-
-[node name="Node2D" parent="." instance=ExtResource("11_t75in")]
-position = Vector2(2689, -622)

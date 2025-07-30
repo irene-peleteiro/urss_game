@@ -18,6 +18,8 @@ var is_down = false
 var artstyle = "1"
 @onready var down_collision: CollisionShape2D = $down_collision
 @onready var up_collision: CollisionShape2D = $up_collision
+@onready var sprint_collision: CollisionPolygon2D = $sprint_collision
+
 
 func change_artstyle_1():
 	artstyle = "1"
@@ -27,9 +29,7 @@ func change_artstyle_3():
 	artstyle = "3"
 
 func _physics_process(delta: float) -> void:
-	#print("coyote_timer: ", coyote_timer)
-	#print("is_on_floor: ", is_on_floor())
-	#print("is_jumping: ", is_jumping)
+	
 	# Add the gravity.
 	if not is_on_floor() and not is_jumping:
 		velocity += get_gravity() * delta * gravity_multiplier
@@ -37,12 +37,71 @@ func _physics_process(delta: float) -> void:
 	else:
 		coyote_timer = 0
 
+
+	# Get the input direction and handle the movement/deceleration.
+	var direction := Input.get_axis("move_left", "move_right")
+	
+	if shake_off and shake_off_timer < shake_off_max:
+		animated_sprite.play("shake" + artstyle)
+		shake_off_timer += delta
+		velocity.x = 0
+	else:
+		speed = 800
+		shake_off_timer = 0
+		shake_off = false
+		
+		jump(delta)
+		sprint(delta)
+		
+		if direction:
+			velocity.x = direction * speed
+		else:
+			velocity.x = move_toward(velocity.x, 0, speed)
+			
+		down()
+		if is_down:
+			speed = 500
+			is_head_wet = false
+		
+		if is_head_wet:
+			head_wet(delta)
+	
+	
+	# flip sprite
+	if direction>0:
+		animated_sprite.flip_h = false
+	elif direction<0:
+		animated_sprite.flip_h = true
+	
+	# handle animations
+	if not is_down and not shake_off: # down/shake have specific animation
+		if is_jumping:
+			animated_sprite.play("prejump" + artstyle)
+		elif not is_on_floor():
+			animated_sprite.play("fall" + artstyle)
+		elif is_sprinting:
+			animated_sprite.play("sprint" + artstyle)
+		elif direction == 0:
+			if is_head_wet:
+				animated_sprite.play("idle_wet" + artstyle)
+			else:
+				animated_sprite.play("idle" + artstyle)
+		else:
+			if is_head_wet:
+				animated_sprite.play("run_wet" + artstyle)
+			else:
+				animated_sprite.play("run" + artstyle)
+	
+	move_and_slide()
+	
+
+func jump(delta: float):
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or coyote_timer<coyote_time):
 		if is_down:
 			is_down = false
-			speed = 800
 			up_collision.disabled = false
+			sprint_collision.disabled = true
 			down_collision.disabled = true
 		velocity.y = jump_velocity
 		is_jumping = true
@@ -55,41 +114,44 @@ func _physics_process(delta: float) -> void:
 		is_jumping = false
 		jump_timer = 0
 
-	# Get the input direction and handle the movement/deceleration.
-	var direction := Input.get_axis("move_left", "move_right")
-	
-	if direction:
-		velocity.x = direction * speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-		
-	# flip sprite
-	if direction>0:
-		animated_sprite.flip_h = false
-	elif direction<0:
-		animated_sprite.flip_h = true
-	
-	
+func down():
 	if Input.is_action_pressed("down") and not is_down:
-		speed = 500
 		is_down = true
 		up_collision.disabled = true
+		sprint_collision.disabled = true
 		down_collision.disabled = false
 		animated_sprite.play("down" + artstyle)
-	
-	# handle animations
-	if not is_down: # down has specific animation
-		if is_jumping:
-			animated_sprite.play("prejump" + artstyle)
-		elif not is_on_floor():
-			animated_sprite.play("fall" + artstyle)
-		elif direction == 0:
-			animated_sprite.play("idle" + artstyle)
-		else:
-			animated_sprite.play("run" + artstyle)
-		
 
-		
+var is_sprinting = false
 
-	move_and_slide()
-	
+func sprint(delta: float):
+	if Input.is_action_pressed("sprint") and is_head_wet:
+		up_collision.disabled = true
+		sprint_collision.disabled = false
+		down_collision.disabled = true
+		is_sprinting = true
+		speed = 1100
+	else:
+		is_sprinting = false
+
+var is_head_wet = false
+var head_wet_timer = 0
+var head_wet_max = 5
+var shake_off = false
+var shake_off_timer = 0
+var shake_off_max = 1
+
+func head_wet_signal():
+	if not is_down:
+		is_head_wet = true
+
+func head_wet(delta: float):
+	head_wet_timer += delta
+	if head_wet_timer > head_wet_max:
+		is_head_wet = false
+		head_wet_timer = 0
+		shake_off = true
+		is_sprinting = false
+		up_collision.disabled = false
+		sprint_collision.disabled = true
+		down_collision.disabled = true
