@@ -10,14 +10,20 @@ var max_collision = Vector2(0,0)
 var segment_height
 var start_point
 
+var reset # only used in the start frames to make sure the splash is correctly drawn
+# the new_collision works fro all but the first time its drawn
+
 func _ready():
 	start_point = original.global_position
+	reset = true
 	spawn_waterfall()
 
 func _process(delta: float) -> void:
+	
 	var new_collision = get_collision_point(start_point, max_collision)
 
-	if new_collision != current_collision:
+	if new_collision != current_collision or reset:
+		reset = false
 		clear_old_waterfall()
 		original.position = Vector2(0,new_collision.y-max_collision.y-420)
 		spawn_waterfall()

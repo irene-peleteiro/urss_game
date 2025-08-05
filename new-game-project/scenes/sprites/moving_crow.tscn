@@ -1,0 +1,111 @@
+[gd_scene load_steps=14 format=3 uid="uid://b6u584hg134hx"]
+
+[ext_resource type="Texture2D" uid="uid://cr2pqmv8kxlmw" path="res://assets/style1/sprites/spritesheet (10).png" id="1_roxxq"]
+[ext_resource type="Script" uid="uid://xndcp4pxco7g" path="res://scripts/path_follow_2d.gd" id="2_kuosf"]
+[ext_resource type="Script" uid="uid://btcmyp4trb63b" path="res://scripts/moving_crow.gd" id="2_wrynt"]
+
+[sub_resource type="Curve2D" id="Curve2D_11ihq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 51, -51, 0, 0, 0, 0, -635, 202, 0, 0, 0, 0, 50, -50)
+}
+point_count = 3
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tfvjl"]
+atlas = ExtResource("1_roxxq")
+region = Rect2(0, 0, 937, 856)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kuosf"]
+atlas = ExtResource("1_roxxq")
+region = Rect2(1874, 0, 937, 856)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wrynt"]
+atlas = ExtResource("1_roxxq")
+region = Rect2(4685, 0, 937, 856)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11ihq"]
+atlas = ExtResource("1_roxxq")
+region = Rect2(937, 0, 937, 856)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5q6u"]
+atlas = ExtResource("1_roxxq")
+region = Rect2(2811, 0, 937, 856)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0vvl"]
+atlas = ExtResource("1_roxxq")
+region = Rect2(3748, 0, 937, 856)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r5q6u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tfvjl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kuosf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wrynt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11ihq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5q6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0vvl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c0vvl"]
+radius = 34.0
+height = 160.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fssp0"]
+radius = 511.605
+
+[node name="moving_crow" type="Path2D"]
+curve = SubResource("Curve2D_11ihq")
+script = ExtResource("2_wrynt")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(49.2431, -50.3521)
+rotation = 2.78826
+progress = 1.89937
+rotates = false
+script = ExtResource("2_kuosf")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PathFollow2D"]
+position = Vector2(401.719, -48.3949)
+rotation = 3.13563
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PathFollow2D/StaticBody2D"]
+position = Vector2(400.315, -59.4313)
+scale = Vector2(0.265347, 0.265347)
+sprite_frames = SubResource("SpriteFrames_r5q6u")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/StaticBody2D"]
+position = Vector2(400.315, -45.4313)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_c0vvl")
+
+[node name="no_zone" type="Area2D" parent="PathFollow2D/StaticBody2D"]
+position = Vector2(498.315, -60.4313)
+scale = Vector2(0.264136, 0.264136)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/StaticBody2D/no_zone"]
+position = Vector2(-336.948, 49.2171)
+shape = SubResource("CircleShape2D_fssp0")
+
+[node name="Polygon2D" type="Polygon2D" parent="PathFollow2D/StaticBody2D/no_zone/CollisionShape2D"]
+position = Vector2(-3.78601, 3.78592)
+scale = Vector2(0.760684, 0.760684)
+color = Color(1, 0.282353, 0.243137, 0.341176)
+polygon = PackedVector2Array(689.04, -37.8593, 465.67, -495.957, 0, -681.468, -522.459, -439.168, -685.254, 102.22, -382.379, 579.248, 238.514, 647.394, 564.104, 393.737)
+
+[connection signal="body_entered" from="PathFollow2D/StaticBody2D/no_zone" to="." method="_on_no_zone_body_entered"]
+[connection signal="body_exited" from="PathFollow2D/StaticBody2D/no_zone" to="." method="_on_no_zone_body_exited"]

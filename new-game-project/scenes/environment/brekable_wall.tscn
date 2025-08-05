@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfmpgavgq2j8f"]
+
+[ext_resource type="Texture2D" uid="uid://yv58ys81t0kp" path="res://assets/style1/environment/breaking_platform.png" id="1_8r8wl"]
+[ext_resource type="Script" uid="uid://cg4nw1r35ikmf" path="res://scripts/brekable_wall.gd" id="1_v0pih"]
+[ext_resource type="Texture2D" uid="uid://b7h58v20kqqse" path="res://assets/style1/environment/smoke.png" id="3_ro3u4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v0pih"]
+radius = 30.0
+height = 488.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ro3u4"]
+radius = 20.0
+height = 482.0
+
+[node name="brekable_wall" type="Node2D"]
+script = ExtResource("1_v0pih")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="StaticBody2D"]
+position = Vector2(0, 3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Area2D"]
+position = Vector2(1, -83)
+shape = SubResource("CapsuleShape2D_v0pih")
+
+[node name="BreakingPlatform" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-11, -82)
+rotation = 1.5708
+scale = Vector2(0.299919, 0.265932)
+texture = ExtResource("1_8r8wl")
+
+[node name="Smoke" type="Sprite2D" parent="StaticBody2D/BreakingPlatform"]
+visible = false
+z_index = 11
+position = Vector2(73.3533, 97.7692)
+rotation = -1.5708
+scale = Vector2(1.12381, 0.921819)
+texture = ExtResource("3_ro3u4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1, -80)
+shape = SubResource("CapsuleShape2D_ro3u4")
+
+[connection signal="body_entered" from="StaticBody2D/Area2D" to="." method="_on_area_2d_body_entered"]

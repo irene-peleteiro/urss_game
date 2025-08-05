@@ -15,16 +15,15 @@ func _back_to_game() -> void:
 	$".".visible = false
 	get_tree().paused = false
 
-signal change_to_digital_art
-signal change_to_pixel_art
 
 func _on_digital_art_pressed() -> void:
-	emit_signal("change_to_digital_art")
+	ArtStyle.artstyle = "1"
 	_back_to_game() # Go back to level
 
 func _on_pixel_art_pressed() -> void:
-	emit_signal("change_to_pixel_art")
+	ArtStyle.artstyle = "2"
 	_back_to_game() # Go back to level
 
 func _on_pencil_art_pressed() -> void:
+	ArtStyle.artstyle = "3"
 	_back_to_game() # Go back to level

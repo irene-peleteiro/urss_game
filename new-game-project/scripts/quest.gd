@@ -1,14 +1,12 @@
-extends Node2D
+# Global Script - Quest
+extends Node
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# keep all waterfalls in node and use for loop when needed
-	$environment/waterfall.sandcat_head_wet.connect($sandcat.head_wet_signal)
+	pass # Replace with function body.
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
-	
-func is_player_head_wet():
 	pass

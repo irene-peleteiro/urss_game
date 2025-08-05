@@ -13,6 +13,8 @@ var coyote_timer = 0
 var prejump_timer = 0
 
 var is_down = false
+var is_scared = false
+var crow_direction 
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 var artstyle = "1"
@@ -21,14 +23,10 @@ var artstyle = "1"
 @onready var sprint_collision: CollisionPolygon2D = $sprint_collision
 
 
-func change_artstyle_1():
-	artstyle = "1"
-func change_artstyle_2():
-	artstyle = "2"
-func change_artstyle_3():
-	artstyle = "3"
+
 
 func _physics_process(delta: float) -> void:
+	artstyle = ArtStyle.artstyle
 	
 	# Add the gravity.
 	if not is_on_floor() and not is_jumping:
@@ -45,6 +43,10 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play("shake" + artstyle)
 		shake_off_timer += delta
 		velocity.x = 0
+		velocity += get_gravity() * delta * gravity_multiplier
+	elif is_scared:
+		velocity = crow_direction * 300
+		animated_sprite.play("scared" + artstyle)
 	else:
 		speed = 800
 		shake_off_timer = 0
@@ -52,16 +54,16 @@ func _physics_process(delta: float) -> void:
 		
 		jump(delta)
 		sprint(delta)
+		down()
+		if is_down:
+			speed = 500
+			is_head_wet = false
 		
 		if direction:
 			velocity.x = direction * speed
 		else:
 			velocity.x = move_toward(velocity.x, 0, speed)
 			
-		down()
-		if is_down:
-			speed = 500
-			is_head_wet = false
 		
 		if is_head_wet:
 			head_wet(delta)
@@ -74,7 +76,7 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.flip_h = true
 	
 	# handle animations
-	if not is_down and not shake_off: # down/shake have specific animation
+	if not is_down and not shake_off and not is_scared: # down/shake have specific animation
 		if is_jumping:
 			animated_sprite.play("prejump" + artstyle)
 		elif not is_on_floor():
