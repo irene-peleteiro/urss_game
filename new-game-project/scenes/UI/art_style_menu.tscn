@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://diww00s7s3r34" path="res://scripts/art_style_menu.gd" id="1_4crcq"]
 [ext_resource type="Shader" uid="uid://cwhd4l0bkkj52" path="res://assets/shaders/root_node.gdshader" id="2_ebypq"]
-[ext_resource type="Texture2D" uid="uid://c0n7qhnqki653" path="res://assets/style1/environment/cave_background.png" id="3_hvsox"]
+[ext_resource type="Texture2D" uid="uid://c0n7qhnqki653" path="res://assets/style3/environment/cave_background.png" id="3_hvsox"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c4p38"]
 shader = ExtResource("2_ebypq")
@@ -25,7 +25,7 @@ material = SubResource("ShaderMaterial_c4p38")
 position = Vector2(161.391, 363.316)
 scale = Vector2(0.284926, 0.297511)
 texture = ExtResource("3_hvsox")
-polygon = PackedVector2Array(-576, -1244.6, -591, 1037.55, 3560, 1024, 3575, -1248.07)
+polygon = PackedVector2Array(-1075.34, -1644.7, -1082.35, 1800.55, 3887.36, 1881.22, 4010.2, -1812.76)
 uv = PackedVector2Array(551, -1257, 39, -1124, -459, -602, -555, 49, -561, 686, -490, 1016, 3560, 1024, 3411, -649, 3038, -1014, 2608, -1105, 1953, -881, 1398, -715, 1042, -740, 827, -1080)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]

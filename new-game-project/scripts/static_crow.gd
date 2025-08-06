@@ -24,8 +24,6 @@ var move_timer = 0
 var going_left = false
 var original_pos
 
-func _process(delta: float) -> void:
-	pass
 
 
 func _on_no_zone_body_entered(body: Node2D) -> void:

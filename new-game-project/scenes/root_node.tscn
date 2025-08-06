@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://by45oky1inesv"]
+[gd_scene load_steps=21 format=3 uid="uid://by45oky1inesv"]
 
 [ext_resource type="Script" uid="uid://cq5gk6r8b5xbq" path="res://scripts/root_node.gd" id="1_vhsfa"]
 [ext_resource type="PackedScene" uid="uid://fw7bjbh6uerk" path="res://scenes/sprites/sandcat.tscn" id="1_ynfbw"]
@@ -15,10 +15,18 @@
 [ext_resource type="PackedScene" uid="uid://bnu0wl2c77mm3" path="res://scenes/environment/breaking_platform.tscn" id="12_b33qr"]
 [ext_resource type="PackedScene" uid="uid://cw0gurmpmicd1" path="res://scenes/sprites/static_crow.tscn" id="14_e6b1x"]
 [ext_resource type="PackedScene" uid="uid://b6u584hg134hx" path="res://scenes/sprites/moving_crow.tscn" id="15_vpben"]
+[ext_resource type="PackedScene" uid="uid://c3m1bst2dy0fq" path="res://scenes/sprites/npc.tscn" id="16_wwi2v"]
+[ext_resource type="SpriteFrames" uid="uid://dm5ikc78j0vj6" path="res://assets/style1/sprites/mocha.tres" id="17_ap4d7"]
+[ext_resource type="Script" uid="uid://gonl60qxgtig" path="res://resources/dialogue/dialogue.gd" id="18_65w77"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l3gbx"]
 shader = ExtResource("2_j38m8")
 shader_parameter/tile_scale = 3.0
+
+[sub_resource type="Resource" id="Resource_motqh"]
+script = ExtResource("18_65w77")
+dialogue = {}
+metadata/_custom_type_script = "uid://gonl60qxgtig"
 
 [node name="root_node" type="Node2D"]
 script = ExtResource("1_vhsfa")
@@ -29,6 +37,9 @@ position = Vector2(262, -744)
 
 [node name="Camera2D" type="Camera2D" parent="sandcat"]
 position = Vector2(-1, -68)
+scale = Vector2(0.6, 0.6)
+offset = Vector2(0, -200)
+zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
@@ -41,7 +52,6 @@ drag_bottom_margin = 0.0
 script = ExtResource("3_gwtxu")
 
 [node name="cave_background" type="Polygon2D" parent="environment"]
-visible = false
 z_index = -10
 texture_repeat = 2
 material = SubResource("ShaderMaterial_l3gbx")
@@ -84,7 +94,6 @@ position = Vector2(-1920, -266)
 position = Vector2(3094, 171)
 
 [node name="sky" type="Polygon2D" parent="environment"]
-visible = false
 z_index = -15
 position = Vector2(63, 2)
 color = Color(0.505882, 0.572549, 0.623529, 1)
@@ -114,3 +123,8 @@ position = Vector2(-125, -127)
 
 [node name="moving_crow" parent="." instance=ExtResource("15_vpben")]
 position = Vector2(1892, -514)
+
+[node name="NPC" parent="." instance=ExtResource("16_wwi2v")]
+position = Vector2(4285, 393)
+npc_animation = ExtResource("17_ap4d7")
+dialogue_resource = SubResource("Resource_motqh")

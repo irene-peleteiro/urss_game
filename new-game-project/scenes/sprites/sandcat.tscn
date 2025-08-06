@@ -453,8 +453,7 @@ script = ExtResource("1_1esfp")
 position = Vector2(-2.38419e-07, 1)
 scale = Vector2(0.219305, 0.219305)
 sprite_frames = SubResource("SpriteFrames_rr8yo")
-animation = &"scared1"
-frame_progress = 0.665176
+animation = &"crouch1"
 
 [node name="down_collision" type="CollisionShape2D" parent="."]
 position = Vector2(4, 106)

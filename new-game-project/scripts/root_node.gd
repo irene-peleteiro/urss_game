@@ -5,10 +5,3 @@ extends Node2D
 func _ready() -> void:
 	# keep all waterfalls in node and use for loop when needed
 	$environment/waterfall.sandcat_head_wet.connect($sandcat.head_wet_signal)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-	
-func is_player_head_wet():
-	pass
