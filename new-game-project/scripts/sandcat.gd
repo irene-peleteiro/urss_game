@@ -24,10 +24,13 @@ var artstyle = "1"
 
 # camera
 @onready var camera: Camera2D = $Camera2D
+# Quest Manager
+@onready var quest_manager: Node2D = $QuestManager
+
 
 func _ready() -> void:
 	Quest.player = self
-
+	# set up inventory
 
 func _physics_process(delta: float) -> void:
 	artstyle = ArtStyle.artstyle
@@ -154,6 +157,7 @@ func sprint():
 		speed = 1100
 	else:
 		is_sprinting = false
+		
 
 var is_head_wet = false
 var head_wet_timer = 0
@@ -187,8 +191,10 @@ var is_interacting = false
 func interact(delta: float):
 	if can_interact:
 		camera.zoom = camera.zoom.lerp(Vector2(0.8,0.8), 1 * delta)
+		camera.offset = camera.offset.lerp(Vector2(0, -100), 1 * delta) 
 	else:
 		camera.zoom = camera.zoom.lerp(Vector2(0.5,0.5), 1 * delta)
+		camera.offset = camera.offset.lerp(Vector2(0, -200), 1 * delta)
 	if Input.is_action_just_pressed("interact") and is_interacting:
 		# if interact is pressed again, go to next dialogue
 		interacting_with.next_dialogue()

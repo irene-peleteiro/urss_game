@@ -1,0 +1,83 @@
+[gd_scene load_steps=5 format=3 uid="uid://btwvg4nxvbg4u"]
+
+[ext_resource type="Script" uid="uid://dn361dqry7e2q" path="res://scripts/menu.gd" id="1_2un8v"]
+[ext_resource type="Shader" uid="uid://cwhd4l0bkkj52" path="res://assets/shaders/root_node.gdshader" id="2_iysyy"]
+[ext_resource type="Texture2D" uid="uid://c0n7qhnqki653" path="res://assets/style3/environment/cave_background.png" id="3_ny0ke"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_78n2u"]
+shader = ExtResource("2_iysyy")
+shader_parameter/tile_scale = 3.0
+
+[node name="Menu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2un8v")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ArtStyleButton" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="CanvasLayer/ArtStyleButton"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 936.0
+offset_top = 10.0
+offset_right = 1099.0
+offset_bottom = 56.0
+grow_horizontal = 0
+text = "Change Art Style"
+
+[node name="ArtStyleMenu" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 393.0
+offset_top = 342.0
+offset_right = 433.0
+offset_bottom = 382.0
+
+[node name="cave_background" type="Polygon2D" parent="CanvasLayer/ArtStyleMenu"]
+light_mask = 0
+z_index = -10
+texture_repeat = 2
+material = SubResource("ShaderMaterial_78n2u")
+position = Vector2(-231.609, 21.316)
+scale = Vector2(0.284926, 0.297511)
+texture = ExtResource("3_ny0ke")
+polygon = PackedVector2Array(-1075.34, -1644.7, -1082.35, 1800.55, 3887.36, 1881.22, 4010.2, -1812.76)
+uv = PackedVector2Array(551, -1257, 39, -1124, -459, -602, -555, 49, -561, 686, -490, 1016, 3560, 1024, 3411, -649, 3038, -1014, 2608, -1105, 1953, -881, 1398, -715, 1042, -740, 827, -1080)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ArtStyleMenu"]
+offset_top = -70.0
+offset_right = 372.0
+offset_bottom = 180.0
+
+[node name="digital_art" type="Button" parent="CanvasLayer/ArtStyleMenu/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Digital Art"
+
+[node name="pixel_art" type="Button" parent="CanvasLayer/ArtStyleMenu/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Pixel Art"
+
+[node name="pencil_art" type="Button" parent="CanvasLayer/ArtStyleMenu/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "Pencil Art"
+
+[connection signal="pressed" from="CanvasLayer/ArtStyleButton/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ArtStyleMenu/VBoxContainer/digital_art" to="." method="_on_digital_art_pressed"]
+[connection signal="pressed" from="CanvasLayer/ArtStyleMenu/VBoxContainer/pixel_art" to="." method="_on_pixel_art_pressed"]
+[connection signal="pressed" from="CanvasLayer/ArtStyleMenu/VBoxContainer/pencil_art" to="." method="_on_pencil_art_pressed"]

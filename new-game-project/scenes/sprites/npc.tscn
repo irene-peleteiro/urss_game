@@ -30,8 +30,7 @@ shape = SubResource("RectangleShape2D_4yhi2")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(161, -55)
 scale = Vector2(0.264363, 0.264363)
-animation = &""
-autoplay = "idle"
+animation = &"idle"
 
 [node name="DialogueManager" parent="." instance=ExtResource("2_rton3")]
 position = Vector2(186, 65)

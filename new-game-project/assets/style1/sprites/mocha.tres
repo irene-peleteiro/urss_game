@@ -9,6 +9,22 @@ animations = [{
 "texture": ExtResource("1_thwf1")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"idle1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_thwf1")
+}],
+"loop": true,
+"name": &"idle2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_thwf1")
+}],
+"loop": true,
+"name": &"idle3",
 "speed": 5.0
 }]

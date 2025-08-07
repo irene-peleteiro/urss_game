@@ -13,5 +13,7 @@ shape = SubResource("CircleShape2D_j0o03")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

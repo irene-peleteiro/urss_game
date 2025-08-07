@@ -8,6 +8,15 @@ extends Control
 func _ready() -> void:
 	hide_dialogue()
 
+func change_dialogue_colour(colour: Color):
+	var style:StyleBoxFlat = StyleBoxFlat.new()
+	style.bg_color = colour
+	panel.add_theme_stylebox_override("panel", style)
+
+func change_text_colour(colour: Color):
+	dialogue_speaker.add_theme_color_override("font_color", colour)
+	dialogue_text.add_theme_color_override("font_color", colour)
+
 func show_dialogue(speaker, text):
 	panel.visible = true
 	

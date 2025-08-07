@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://fw7bjbh6uerk"]
+[gd_scene load_steps=63 format=3 uid="uid://fw7bjbh6uerk"]
 
 [ext_resource type="Script" uid="uid://bucmflk47xak2" path="res://scripts/sandcat.gd" id="1_1esfp"]
 [ext_resource type="Texture2D" uid="uid://bgc1vymsa437l" path="res://assets/style1/player/sandcat1.png" id="1_kb84i"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cjpsf5grpbfe5" path="res://assets/style1/player/spritesheet (5).png" id="9_f454d"]
 [ext_resource type="Texture2D" uid="uid://dxmxrdy68qrne" path="res://assets/style1/player/spritesheet (6).png" id="10_f454d"]
 [ext_resource type="Texture2D" uid="uid://dml1ouyqga0u0" path="res://assets/style1/player/spritesheet (9).png" id="11_wbi30"]
+[ext_resource type="PackedScene" uid="uid://dwtxgmwgbbn7j" path="res://scenes/quest/quest_manager.tscn" id="13_e4mll"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mcnfo"]
 atlas = ExtResource("2_2mqr0")
@@ -468,3 +469,6 @@ shape = SubResource("CapsuleShape2D_fhexb")
 [node name="sprint_collision" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(75, -13, 93, -9, 94, 27, 13, 67, 4, 128, -22, 128, -47, 68, 9, 10)
 disabled = true
+
+[node name="QuestManager" parent="." instance=ExtResource("13_e4mll")]
+position = Vector2(224, -157)

@@ -1,8 +1,30 @@
 [gd_scene load_steps=5 format=3 uid="uid://jxdqmoiv4kig"]
 
-[ext_resource type="Script" uid="uid://diww00s7s3r34" path="res://scripts/art_style_menu.gd" id="1_4crcq"]
 [ext_resource type="Shader" uid="uid://cwhd4l0bkkj52" path="res://assets/shaders/root_node.gdshader" id="2_ebypq"]
 [ext_resource type="Texture2D" uid="uid://c0n7qhnqki653" path="res://assets/style3/environment/cave_background.png" id="3_hvsox"]
+
+[sub_resource type="GDScript" id="GDScript_ky8bj"]
+script/source = "extends Control
+
+
+func _back_to_game() -> void:
+	$\"../art_style_button\".visible = true
+	$\".\".visible = false
+	get_tree().paused = false
+
+
+func _on_digital_art_pressed() -> void:
+	ArtStyle.artstyle = \"1\"
+	_back_to_game() # Go back to level
+
+func _on_pixel_art_pressed() -> void:
+	ArtStyle.artstyle = \"2\"
+	_back_to_game() # Go back to level
+
+func _on_pencil_art_pressed() -> void:
+	ArtStyle.artstyle = \"3\"
+	_back_to_game() # Go back to level
+"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c4p38"]
 shader = ExtResource("2_ebypq")
@@ -15,7 +37,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_4crcq")
+script = SubResource("GDScript_ky8bj")
 
 [node name="cave_background" type="Polygon2D" parent="."]
 light_mask = 0

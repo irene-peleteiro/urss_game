@@ -1,11 +1,28 @@
-extends Node
+extends Resource
+
+class_name QuestResource
+
+@export var quest_id: String
+@export var quest_name: String
+@export var state: String = "not_started"
+@export var objective: Objective = null
+@export var rewards: Reward = null
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func is_completed() -> bool:
+	if not objective.is_completed:
+		return false
+	return true
 
+func complete_collect_obj(item_id: String, quantity: int):
+	if objective.target_type == "collect" and objective.target_id == item_id:
+		objective.collected_quantity += quantity
+		if objective.collected_quantity >= objective.required_quantity:
+			objective.is_completed = true
+	if is_completed():
+		state = "complete"
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func complete_talk_obj():
+	if objective.target_type == "talk_to":
+		objective.is_completed = true
+		state = "complete"

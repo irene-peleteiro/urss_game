@@ -1,29 +1,57 @@
-[gd_scene load_steps=21 format=3 uid="uid://by45oky1inesv"]
+[gd_scene load_steps=26 format=3 uid="uid://by45oky1inesv"]
 
 [ext_resource type="Script" uid="uid://cq5gk6r8b5xbq" path="res://scripts/root_node.gd" id="1_vhsfa"]
 [ext_resource type="PackedScene" uid="uid://fw7bjbh6uerk" path="res://scenes/sprites/sandcat.tscn" id="1_ynfbw"]
 [ext_resource type="Shader" uid="uid://cwhd4l0bkkj52" path="res://assets/shaders/root_node.gdshader" id="2_j38m8"]
-[ext_resource type="PackedScene" uid="uid://de7qxfhc46bca" path="res://scenes/UI/art_style_button.tscn" id="2_l3gbx"]
 [ext_resource type="Script" uid="uid://c0n2yjh5ptnxv" path="res://scripts/environment.gd" id="3_gwtxu"]
 [ext_resource type="Texture2D" uid="uid://c0n7qhnqki653" path="res://assets/style3/environment/cave_background.png" id="3_ldoum"]
 [ext_resource type="PackedScene" uid="uid://dve3kyehsa1vu" path="res://scenes/environment/floor.tscn" id="4_7b5fe"]
 [ext_resource type="PackedScene" uid="uid://ddgqfv4aut45v" path="res://scenes/environment/cave_1.tscn" id="4_jfjke"]
 [ext_resource type="PackedScene" uid="uid://l3llu6najks2" path="res://scenes/environment/platform.tscn" id="5_jfjke"]
-[ext_resource type="PackedScene" uid="uid://jxdqmoiv4kig" path="res://scenes/UI/art_style_menu.tscn" id="7_d78ui"]
 [ext_resource type="PackedScene" uid="uid://cfmpgavgq2j8f" path="res://scenes/environment/brekable_wall.tscn" id="11_i6oe7"]
 [ext_resource type="PackedScene" uid="uid://bdfhxuom6gf80" path="res://scenes/environment/waterfall.tscn" id="11_t75in"]
+[ext_resource type="PackedScene" uid="uid://btwvg4nxvbg4u" path="res://scenes/UI/menu.tscn" id="12_65w77"]
 [ext_resource type="PackedScene" uid="uid://bnu0wl2c77mm3" path="res://scenes/environment/breaking_platform.tscn" id="12_b33qr"]
 [ext_resource type="PackedScene" uid="uid://cw0gurmpmicd1" path="res://scenes/sprites/static_crow.tscn" id="14_e6b1x"]
 [ext_resource type="PackedScene" uid="uid://b6u584hg134hx" path="res://scenes/sprites/moving_crow.tscn" id="15_vpben"]
 [ext_resource type="PackedScene" uid="uid://c3m1bst2dy0fq" path="res://scenes/sprites/npc.tscn" id="16_wwi2v"]
 [ext_resource type="SpriteFrames" uid="uid://dm5ikc78j0vj6" path="res://assets/style1/sprites/mocha.tres" id="17_ap4d7"]
 [ext_resource type="Script" uid="uid://gonl60qxgtig" path="res://resources/dialogue/dialogue.gd" id="18_65w77"]
+[ext_resource type="SpriteFrames" uid="uid://bune66ffk6i8v" path="res://assets/style1/sprites/marigold.tres" id="18_motqh"]
+[ext_resource type="Script" uid="uid://cu2lpn3ktywa3" path="res://resources/quest/quest.gd" id="19_motqh"]
+[ext_resource type="Script" uid="uid://orelpqn6cckw" path="res://resources/quest/objectives.gd" id="19_qvdbn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l3gbx"]
 shader = ExtResource("2_j38m8")
 shader_parameter/tile_scale = 3.0
 
 [sub_resource type="Resource" id="Resource_motqh"]
+script = ExtResource("18_65w77")
+dialogue = {}
+metadata/_custom_type_script = "uid://gonl60qxgtig"
+
+[sub_resource type="Resource" id="Resource_74gyt"]
+script = ExtResource("19_qvdbn")
+id = "1"
+description = "talk "
+target_id = "Marigold"
+target_type = "talk_to"
+target_dialogue = "Marigold2.0"
+required_quantity = 0
+collected_quantity = 0
+is_completed = false
+next_dialogue = "Mocha2.0"
+metadata/_custom_type_script = "uid://orelpqn6cckw"
+
+[sub_resource type="Resource" id="Resource_plwfq"]
+script = ExtResource("19_motqh")
+quest_id = "Mocha0"
+quest_name = "Talk to Marigold"
+state = "not_started"
+objective = SubResource("Resource_74gyt")
+metadata/_custom_type_script = "uid://cu2lpn3ktywa3"
+
+[sub_resource type="Resource" id="Resource_65w77"]
 script = ExtResource("18_65w77")
 dialogue = {}
 metadata/_custom_type_script = "uid://gonl60qxgtig"
@@ -90,6 +118,9 @@ position = Vector2(-2379, 375)
 [node name="floor" parent="environment/all_platforms" instance=ExtResource("4_7b5fe")]
 position = Vector2(-1920, -266)
 
+[node name="floor4" parent="environment/all_platforms" instance=ExtResource("4_7b5fe")]
+position = Vector2(1241, 618)
+
 [node name="breaking_platform" parent="environment" instance=ExtResource("12_b33qr")]
 position = Vector2(3094, 171)
 
@@ -105,16 +136,7 @@ position = Vector2(2689, -622)
 [node name="brekable_wall" parent="environment" instance=ExtResource("11_i6oe7")]
 position = Vector2(3809, 361)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 0
-
-[node name="art_style_menu" parent="CanvasLayer" instance=ExtResource("7_d78ui")]
-visible = false
-
-[node name="art_style_button" parent="CanvasLayer" instance=ExtResource("2_l3gbx")]
-z_index = 2
-offset_left = 0.0
-offset_bottom = 0.0
+[node name="Menu" parent="." instance=ExtResource("12_65w77")]
 
 [node name="crows" type="Node" parent="."]
 
@@ -125,6 +147,19 @@ position = Vector2(-125, -127)
 position = Vector2(1892, -514)
 
 [node name="NPC" parent="." instance=ExtResource("16_wwi2v")]
-position = Vector2(4285, 393)
+position = Vector2(4730, 387)
 npc_animation = ExtResource("17_ap4d7")
 dialogue_resource = SubResource("Resource_motqh")
+dialogue_colour = Color(0.33, 0.2145, 0.0528, 1)
+dialogue_text_colour = Color(0.63, 0.347025, 0.1449, 1)
+quests = Array[ExtResource("19_motqh")]([SubResource("Resource_plwfq")])
+
+[node name="NPC2" parent="." instance=ExtResource("16_wwi2v")]
+position = Vector2(3901, 389)
+npc_name = "Marigold"
+npc_animation = ExtResource("18_motqh")
+area_offset = 350
+facing_left = true
+dialogue_resource = SubResource("Resource_65w77")
+dialogue_colour = Color(0.81, 0.71523, 0.1782, 1)
+dialogue_text_colour = Color(0.71, 0.534275, 0.00709999, 1)

@@ -3,39 +3,54 @@
 		"tree" : [
 			{
 				"branch_id": "Mocha1.0",
-				"text": ["something","info","more"]
+				"text": ["Hey there Sandy! How you doing?",
+						"What? Still don't like the nicknames I have for you? Heh.",
+						"You'll get used to 'em!", 
+						"Anyways, shop's always open for you buddy. Been a few busy days with the tortoisse troubles but Mari's got them right now. What can I get for you?"],
+				"quest": "Mocha0"
 			},
 			{
 				"branch_id": "Mocha1.5",
-				"text": ["repeat important info"]
+				"text": ["Anything I can interest you in? Everythin's free as long as you get me some fish!"],
+				"quest": "Mocha0"
 			},
 			{
 				"branch_id": "Mocha2.0",
-				"text": ["something","info","more"]
+				"text": ["I see you've talked to my one and only Mari! The butter of my life!","Course I meant butter, she melts you away.","You in need of anythig?"],
+				"quest": ""
 			},
 			{
 				"branch_id": "Mocha2.5",
-				"text": ["repeat important info"]
+				"text": ["Always here to service your every need, heh!"],
+				"quest": ""
 			},
 		]
 	},
-	"MangoKiwi": {
+	"Marigold": {
 		"tree" : [
 			{
-				"branch_id": "Mango1.0",
-				"text": ["something","info","more"]
+				"branch_id": "Marigold1.0",
+				"text": ["Hello, lovely. How's the life up the island going?",
+						"Aww, sweetheart, you know those crows give everyone trouble...",
+						"How about this - I've got a feather I found lying around, I'll give it to you if you manage to entertain my scoundrells for a bit."],
+				"quest": ""
 			},
 			{
-				"branch_id": "Mango1.5",
-				"text": ["repeat important info"]
+				"branch_id": "Marigold1.5",
+				"text": ["Maybe you could play some [] with them? I have no idea what can keep them from asking me something every 10 seconds anymore."],
+				"quest": ""
 			},
 			{
-				"branch_id": "Mango2.0",
-				"text": ["something","info","more"]
+				"branch_id": "Marigold2.0",
+				"text": ["Ah, I see you've talked to Mocha.",
+						"Of course I can tell! No one gets you as tousselled as Mocha does!",
+						"What was it this time? Pawsands? Dustkitty? Ha! Must've been something new then."],
+				"quest": ""
 			},
 			{
-				"branch_id": "Mango2.5",
-				"text": ["repeat important info"]
+				"branch_id": "Marigold2.5",
+				"text": ["I tell you if the shop wasn't full of fish hooks I'd send these rascalls with Mocha, but here we are."],
+				"quest": ""
 			},
 		]
 	}
